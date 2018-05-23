@@ -44,7 +44,7 @@ class LoggerServiceProvider extends ServiceProvider
     {
         Benchmarking::start('application');
 
-        $this->app['events']->listen('kernel.handled', function ($request, $response) {
+        $this->app['events']->listen('Illuminate\Foundation\Http\Events\RequestHandled', function ($request, $response) {
 
             Benchmarking::end('application');
 
