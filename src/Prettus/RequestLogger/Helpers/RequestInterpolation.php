@@ -1,6 +1,8 @@
 <?php namespace Prettus\RequestLogger\Helpers;
 
 use Carbon\Carbon;
+use Auth;
+use Log;
 
 /**
  * Class RequestInterpolation
@@ -83,9 +85,19 @@ class RequestInterpolation extends BaseInterpolation {
 
             if( count($matches) == 2 ) {
                 switch($matches[0]) {
-                case "date":
-                    $matches[] = "clf";
-                    break;
+                    case "date":
+                        $matches[] = "clf";
+                        break;
+                    case "email":
+                        if ($user = Auth::user()) {
+                            return $user->email;
+                        } else {
+                            return '';
+                        }
+                        break;
+                    case "params":
+                        return json_encode($this->request->except(config('request-logger.logger.except', ['password', 'password_confirmation'])));
+                        break;
                 }
             }
 
