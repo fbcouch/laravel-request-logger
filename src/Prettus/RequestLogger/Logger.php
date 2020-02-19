@@ -2,14 +2,14 @@
 
 namespace Prettus\RequestLogger;
 
-use Illuminate\Contracts\Logging\Log;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class Logger
  * @package Prettus\Logger\Request
  * @author Anderson Andrade <contato@andersonandra.de>
  */
-class Logger implements Log
+class Logger implements LoggerInterface
 {
 
     /**
