@@ -20,24 +20,24 @@ class Logger implements LoggerInterface
     /**
      *
      */
-    public function __construct()
+    public function __construct($logger)
     {
-        $this->monolog = clone app('log')->getMonolog();
+        $this->monolog = $logger;
 
-        if( config('request-logger.logger.enabled') && $handlers = config('request-logger.logger.handlers') ) {
-            if( count($handlers) ) {
-                //Remove default laravel handler
-                $this->monolog->popHandler();
+        // if( config('request-logger.logger.enabled') && $handlers = config('request-logger.logger.handlers') ) {
+        //     if( count($handlers) ) {
+        //         //Remove default laravel handler
+        //         $this->monolog->popHandler();
 
-                foreach($handlers as $handler) {
-                    if( class_exists($handler) ) {
-                        $this->monolog->pushHandler(app($handler));
-                    } else {
-                        throw new \Exception("Handler class [{$handler}] does not exist");
-                    }
-                }
-            }
-        }
+        //         foreach($handlers as $handler) {
+        //             if( class_exists($handler) ) {
+        //                 $this->monolog->pushHandler(app($handler));
+        //             } else {
+        //                 throw new \Exception("Handler class [{$handler}] does not exist");
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     /**

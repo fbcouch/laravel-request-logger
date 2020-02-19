@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Prettus\RequestLogger\Helpers\RequestInterpolation;
 use Prettus\RequestLogger\Helpers\ResponseInterpolation;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class Logger
@@ -40,12 +41,7 @@ class ResponseLogger
      */
     protected $responseInterpolation;
 
-    /**
-     * @var Logger
-     */
-    protected $logger;
-
-    public function __construct(Logger $logger, RequestInterpolation $requestInterpolation, ResponseInterpolation $responseInterpolation)
+    public function __construct(RequestInterpolation $requestInterpolation, ResponseInterpolation $responseInterpolation)
     {
         $this->logger = $logger;
         $this->requestInterpolation = $requestInterpolation;
