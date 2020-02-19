@@ -43,7 +43,6 @@ class ResponseLogger
 
     public function __construct(RequestInterpolation $requestInterpolation, ResponseInterpolation $responseInterpolation)
     {
-        $this->logger = $logger;
         $this->requestInterpolation = $requestInterpolation;
         $this->responseInterpolation = $responseInterpolation;
     }
@@ -63,7 +62,7 @@ class ResponseLogger
             $format = array_get($this->formats, $format, $format);
             $message = $this->responseInterpolation->interpolate($format);
             $message = $this->requestInterpolation->interpolate($message);
-            $this->logger->log( config('request-logger.logger.level', 'info') , $message, [
+            Log::log( config('request-logger.logger.level', 'info') , $message, [
                 static::LOG_CONTEXT
             ]);
         }
